@@ -37,7 +37,7 @@ namespace Jeff_ProcessFiles
 
 
         private static string PoolId = "JeffProcessFilePool";
-        private static string JobId = "JeffProcessFileJob08";
+        private static string JobId = "JeffProcessFileJob09";
 
         public static void StartProcess(string[] args)
         {
@@ -280,7 +280,7 @@ namespace Jeff_ProcessFiles
 
             CloudBlobContainer container = blobClient.GetContainerReference(containerName);
             CloudBlockBlob blobData = container.GetBlockBlobReference(blobName);
-            //await blobData.UploadFromFileAsync(filePath, FileMode.Open);
+            await blobData.UploadFromFileAsync(filePath, FileMode.Open);
 
             // Set the expiry time and permissions for the blob shared access signature. In this case, no start time is specified,
             // so the shared access signature becomes valid immediately

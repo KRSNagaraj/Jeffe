@@ -15,3 +15,6 @@ E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\bin\Debug\Sys
 E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\obj\Debug\RunFileProcessApp.csprojResolveAssemblyReference.cache
 E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\obj\Debug\RunFileProcessApp.exe
 E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\obj\Debug\RunFileProcessApp.pdb
+E:\Work\Freelance\Jeff\Git\Jeffe\AzureBatchService_v01\RunFileProcessApp\bin\Debug\RunFileProcessApp.exe.config
+E:\Work\Freelance\Jeff\Git\Jeffe\AzureBatchService_v01\RunFileProcessApp\obj\Debug\RunFileProcessApp.exe
+E:\Work\Freelance\Jeff\Git\Jeffe\AzureBatchService_v01\RunFileProcessApp\obj\Debug\RunFileProcessApp.pdb
