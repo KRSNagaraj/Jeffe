@@ -77,6 +77,8 @@ namespace Jeff_ProcessFiles
             StorageAccountKey = ConfigurationManager.AppSettings["StorageAccountKey"];
 
             ContainerName = ConfigurationManager.AppSettings["ContainerName"];
+            PoolId = ConfigurationManager.AppSettings["PoolId"];
+            JobId = ConfigurationManager.AppSettings["JobId"];
 
         }
         /// <summary>
