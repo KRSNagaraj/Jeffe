@@ -86,7 +86,7 @@ namespace Jeff_ProcessFiles
         private static async Task MainAsync()
         {
             LoadConfig();
-            Console.WriteLine("Sample start: {0}", DateTime.Now);
+            Console.WriteLine("File Process started: {0}", DateTime.Now);
             Console.WriteLine();
             Stopwatch timer = new Stopwatch();
             timer.Start();
@@ -175,7 +175,7 @@ namespace Jeff_ProcessFiles
                 // Print out some timing info
                 timer.Stop();
                 Console.WriteLine();
-                Console.WriteLine("Sample end: {0}", DateTime.Now);
+                Console.WriteLine("File Process end: {0}", DateTime.Now);
                 Console.WriteLine("Elapsed time: {0}", timer.Elapsed);
 
                 // Clean up Batch resources (if the user so chooses)
