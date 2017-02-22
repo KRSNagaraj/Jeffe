@@ -1,0 +1,17 @@
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\bin\Debug\RunFileProcessApp.exe.config
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\bin\Debug\RunFileProcessApp.exe
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\bin\Debug\RunFileProcessApp.pdb
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\bin\Debug\Microsoft.WindowsAzure.Storage.dll
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\bin\Debug\Microsoft.Data.Services.Client.dll
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\bin\Debug\Microsoft.Data.OData.dll
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\bin\Debug\Microsoft.Data.Edm.dll
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\bin\Debug\System.Spatial.dll
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\bin\Debug\Microsoft.WindowsAzure.Storage.pdb
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\bin\Debug\Microsoft.WindowsAzure.Storage.xml
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\bin\Debug\Microsoft.Data.Services.Client.xml
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\bin\Debug\Microsoft.Data.OData.xml
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\bin\Debug\Microsoft.Data.Edm.xml
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\bin\Debug\System.Spatial.xml
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\obj\Debug\RunFileProcessApp.csprojResolveAssemblyReference.cache
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\obj\Debug\RunFileProcessApp.exe
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\obj\Debug\RunFileProcessApp.pdb

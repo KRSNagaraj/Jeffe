@@ -1,0 +1,8 @@
+Index was outside the bounds of the array.
+   at RunFileProcessApp.Program.Main(String[] args) in E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\Program.cs:line 48
+
+------------------------------
+Node: 
+Task: 
+Job:  
+Pool: 

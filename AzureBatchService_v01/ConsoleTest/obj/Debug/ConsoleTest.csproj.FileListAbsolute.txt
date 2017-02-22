@@ -1,0 +1,6 @@
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\ConsoleTest\bin\Debug\ConsoleTest.exe.config
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\ConsoleTest\bin\Debug\ConsoleTest.exe
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\ConsoleTest\bin\Debug\ConsoleTest.pdb
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\ConsoleTest\obj\Debug\ConsoleTest.csprojResolveAssemblyReference.cache
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\ConsoleTest\obj\Debug\ConsoleTest.exe
+E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\ConsoleTest\obj\Debug\ConsoleTest.pdb
