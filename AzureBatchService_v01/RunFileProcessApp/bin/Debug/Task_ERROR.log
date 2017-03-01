@@ -1,5 +1,5 @@
 Index was outside the bounds of the array.
-   at RunFileProcessApp.Program.Main(String[] args) in E:\Work\Freelance\Jeff\Git\AzureBatchService_v01\RunFileProcessApp\Program.cs:line 48
+   at RunFileProcessApp.Program.Main(String[] args) in F:\Work\Jeff\Jeffe\AzureBatchService_v01\RunFileProcessApp\Program.cs:line 48
 
 ------------------------------
 Node: 

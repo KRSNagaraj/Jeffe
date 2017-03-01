@@ -13,8 +13,8 @@ namespace RunFileProcessApp
 {
     public class Program
     {
-        private static string StorageAccountName = "storageforbatchservice";
-        private static string StorageAccountKey = "9pJHNFp9P0rJZOOLorlLX01iMfmS3OmoWssL+dn6zLgw70DKjNGKjSN2YRYxirEwHn6pemFV5X9KcbyYzxFXag==";
+        private static string StorageAccountName = "fileprocess01";
+        private static string StorageAccountKey = "0IDOyy9TZoLB4Qn0++gx98mlSNC/uz/PwAbKYRZY1elXM5ITYMHH9HqXyyiJ5LWbeVE304JY4zQ0ooadyyzbRg==";
         private static string ContainerName = "output";
 
         private static void LoadConfig()
@@ -29,7 +29,7 @@ namespace RunFileProcessApp
         public static void Main(string[] args)
         {
             //test();
-
+            LoadConfig();
             // Construct the Storage account connection string
             string storageConnectionString = String.Format("DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1}",
                                                             StorageAccountName, StorageAccountKey);
@@ -124,6 +124,7 @@ namespace RunFileProcessApp
             try
             {
                 CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+                container.CreateIfNotExistsAsync().Wait();
                 CloudBlockBlob blobData = container.GetBlockBlobReference(blobName);
                 blobData.UploadFromFileAsync(filePath, FileMode.Open).Wait();
             }

@@ -18,20 +18,20 @@ namespace Jeff_ProcessFiles
         static void Main(string[] args)
         {
             RunJob.StartProcess(args);
-            ProcessFiles jb = new ProcessFiles();
-            jb.DownloadFromAzureStorage();
+            //ProcessFiles jb = new ProcessFiles();
+            //jb.DownloadFromAzureStorage();
 
-            LoadAppSettings(settings);
-            Runjob(args);
+            //LoadAppSettings(settings);
+            //Runjob(args);
 
-            if (args != null && args.Length > 0 && args[0] == "--Task")
-            {
-                ProcessFiles.TaskMain(args);
-            }
-            else
-            {
-                Job.JobMain(args);
-            }
+            //if (args != null && args.Length > 0 && args[0] == "--Task")
+            //{
+            //    ProcessFiles.TaskMain(args);
+            //}
+            //else
+            //{
+            //    Job.JobMain(args);
+            //}
         }
 
         private static void Runjob(string[] args)

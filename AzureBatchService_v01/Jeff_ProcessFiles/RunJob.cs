@@ -118,17 +118,18 @@ namespace Jeff_ProcessFiles
                 // determine the path of the task application binary dynamically
                 typeof(RunFileProcessApp.Program).Assembly.Location,
                 "Microsoft.WindowsAzure.Storage.dll",
-                @"..\..\ExeFile\create_tests.exe"
+                @"..\..\ExeFile\create_tests.exe",
+                @"..\..\ExeFile\RunFileProcessApp.exe.config"
             };
 
-            // The collection of data files that are to be processed by the tasks
+            //// The collection of data files that are to be processed by the tasks
             List<string> inputFilePaths = new List<string>();
-            for (int cnt = 0; cnt < 10; cnt++)
-            {
-                //var _s = cnt > 9 ? "" : "0";
-                //inputFilePaths.Add(@"..\..\Files\InputFile_" + _s + cnt + ".dat");
+            //for (int cnt = 0; cnt < 10; cnt++)
+            //{
+            //    //var _s = cnt > 9 ? "" : "0";
+            //    //inputFilePaths.Add(@"..\..\Files\InputFile_" + _s + cnt + ".dat");
 
-            }
+            //}
 
             foreach (string p in Directory.GetFiles(@"..\..\Files\"))
             {
@@ -141,10 +142,11 @@ namespace Jeff_ProcessFiles
 
             // Upload the data files. This is the data that will be processed by each of the tasks that are
             // executed on the compute nodes within the pool.
-            List<ResourceFile> inputFiles = await UploadFilesToContainerAsync(blobClient, inputContainerName, inputFilePaths);
+            //List<ResourceFile> inputFiles = await UploadFilesToContainerAsync(blobClient, inputContainerName, inputFilePaths);
+            List<ResourceFile> inputFiles = await GetInputFileList(blobClient, inputContainerName);
 
             // Obtain a shared access signature that provides write access to the output container to which
-            // the tasks will upload their output.
+            //// the tasks will upload their output.
             string outputContainerSasUrl = GetContainerSasUrl(blobClient, outputContainerName, SharedAccessBlobPermissions.Write);
 
             // Create a BatchClient. We'll now be interacting with the Batch service in addition to Storage
@@ -171,7 +173,7 @@ namespace Jeff_ProcessFiles
 
                 // Clean up Storage resources
                 await DeleteContainerAsync(blobClient, appContainerName);
-                await DeleteContainerAsync(blobClient, inputContainerName);
+                //await DeleteContainerAsync(blobClient, inputContainerName);
                 await DeleteContainerAsync(blobClient, outputContainerName);
 
                 // Print out some timing info
@@ -196,6 +198,24 @@ namespace Jeff_ProcessFiles
                     await batchClient.PoolOperations.DeletePoolAsync(PoolId);
                 }
             }
+        }
+
+        private static async Task<List<ResourceFile>> GetInputFileList(CloudBlobClient blobClient, string inputContainerName)
+        {
+            List<ResourceFile> results = new List<ResourceFile>();
+            CloudBlobContainer container = blobClient.GetContainerReference(inputContainerName);
+            foreach (var item in container.ListBlobs(null, false))
+            {
+                if (item.GetType() == typeof(CloudBlockBlob))
+                {
+                    CloudBlockBlob blob = (CloudBlockBlob)item;
+
+                    results.Add(new ResourceFile(blob.Uri.ToString(), blob.Name));
+                }
+
+            }
+            return results;
+
         }
 
         /// <summary>
@@ -400,13 +420,14 @@ namespace Jeff_ProcessFiles
             foreach (ResourceFile inputFile in inputFiles)
             {
                 string taskId = "topNtask" + inputFiles.IndexOf(inputFile);
-                string taskCommandLine = String.Format("cmd /c %AZ_BATCH_NODE_SHARED_DIR%\\RunFileProcessApp.exe %AZ_BATCH_NODE_SHARED_DIR%\\create_tests.exe {0} 3 \"{1}\"", inputFile.FilePath, outputContainerSasUrl);
+                string taskCommandLine = String.Format("cmd /c %AZ_BATCH_NODE_SHARED_DIR%\\RunFileProcessApp.exe %AZ_BATCH_NODE_SHARED_DIR%\\create_tests.exe {0}  \"{1}\"", inputFile.FilePath, outputContainerSasUrl);
 
                 CloudTask task = new CloudTask(taskId, taskCommandLine);
                 task.ResourceFiles = new List<ResourceFile> { inputFile };
                 tasks.Add(task);
             }
 
+            //batchClient.JobOperations.AddTask(jobId, tasks);
             // Add the tasks as a collection opposed to a separate AddTask call for each. Bulk task submission
             // helps to ensure efficient underlying API calls to the Batch service.
             await batchClient.JobOperations.AddTaskAsync(jobId, tasks);
