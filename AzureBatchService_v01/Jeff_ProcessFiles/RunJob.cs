@@ -34,6 +34,7 @@ namespace Jeff_ProcessFiles
         private static int ComputeNode = 1;
         private static string vmSize = "small";
         private static int TaskPerNode = 2;
+        private static int WaitTime = 30;
 
 
         private static string PoolId = "JeffProcessFilePool";
@@ -61,12 +62,17 @@ namespace Jeff_ProcessFiles
                 Console.ReadLine();
             }
         }
+
+        /// <summary>
+        /// Loading configuration values from config files and used inside batch service 
+        /// </summary>
         private static void LoadConfig()
         {
 
             ComputeNode = int.Parse(ConfigurationManager.AppSettings["ComputeNode"]);
             vmSize = ConfigurationManager.AppSettings["vmSize"];
             TaskPerNode = int.Parse(ConfigurationManager.AppSettings["TaskPerNode"]);
+            WaitTime = int.Parse(ConfigurationManager.AppSettings["WaitTime"]);
 
             BatchAccountName = ConfigurationManager.AppSettings["BatchAccountName"];
             BatchAccountKey = ConfigurationManager.AppSettings["BatchAccountKey"];
@@ -124,25 +130,14 @@ namespace Jeff_ProcessFiles
 
             //// The collection of data files that are to be processed by the tasks
             List<string> inputFilePaths = new List<string>();
-            //for (int cnt = 0; cnt < 10; cnt++)
-            //{
-            //    //var _s = cnt > 9 ? "" : "0";
-            //    //inputFilePaths.Add(@"..\..\Files\InputFile_" + _s + cnt + ".dat");
-
-            //}
-
-            foreach (string p in Directory.GetFiles(@"..\..\Files\"))
-            {
-                inputFilePaths.Add(p);
-            }
+        
 
             // Upload the application and its dependencies to Azure Storage. This is the application that will
             // process the data files, and will be executed by each of the tasks on the compute nodes.
             List<ResourceFile> applicationFiles = await UploadFilesToContainerAsync(blobClient, appContainerName, applicationFilePaths);
 
-            // Upload the data files. This is the data that will be processed by each of the tasks that are
+            // Fetch the data files. This is the data that will be processed by each of the tasks that are
             // executed on the compute nodes within the pool.
-            //List<ResourceFile> inputFiles = await UploadFilesToContainerAsync(blobClient, inputContainerName, inputFilePaths);
             List<ResourceFile> inputFiles = await GetInputFileList(blobClient, inputContainerName);
 
             // Obtain a shared access signature that provides write access to the output container to which
@@ -166,7 +161,7 @@ namespace Jeff_ProcessFiles
                 await AddTasksAsync(batchClient, JobId, inputFiles, outputContainerSasUrl);
 
                 // Monitor task success/failure, specifying a maximum amount of time to wait for the tasks to complete
-                await MonitorTasks(batchClient, JobId, TimeSpan.FromMinutes(30));
+                await MonitorTasks(batchClient, JobId, TimeSpan.FromMinutes(WaitTime));
 
                 // Download the task output files from the output Storage container to a local directory
                 await DownloadBlobsFromContainerAsync(blobClient, outputContainerName, Environment.GetEnvironmentVariable("TEMP"));
@@ -199,10 +194,16 @@ namespace Jeff_ProcessFiles
                 }
             }
         }
-
+        /// <summary>
+        /// Get list of input files from azure blob storage for process task
+        /// </summary>
+        /// <param name="blobClient"></param>
+        /// <param name="inputContainerName"></param>
+        /// <returns></returns>
         private static async Task<List<ResourceFile>> GetInputFileList(CloudBlobClient blobClient, string inputContainerName)
         {
             List<ResourceFile> results = new List<ResourceFile>();
+            int nCount = 0;
             CloudBlobContainer container = blobClient.GetContainerReference(inputContainerName);
             foreach (var item in container.ListBlobs(null, false))
             {
@@ -211,6 +212,9 @@ namespace Jeff_ProcessFiles
                     CloudBlockBlob blob = (CloudBlockBlob)item;
 
                     results.Add(new ResourceFile(blob.Uri.ToString(), blob.Name));
+
+                    //nCount++;
+                    //if (nCount > 500) break;
                 }
 
             }
