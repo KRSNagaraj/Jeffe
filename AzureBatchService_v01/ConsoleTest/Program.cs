@@ -92,14 +92,13 @@ namespace ConsoleTest
 
             CloudBlockBlob sourceBlob = blobContainer.GetBlockBlobReference(sourceBlobName);
 
-            for (int cnt =3; cnt <= 100; cnt++)
+            for (int cnt =1; cnt <= 500; cnt++)
             {
                 string blob = destBlobName + (cnt > 9 ? "" : "0") + cnt.ToString() + ".dat";
 
                 CloudBlockBlob destinationBlob = blobContainer.GetBlockBlobReference(blob);
 
                 destinationBlob.StartCopy(sourceBlob);
-
             }
 
 
